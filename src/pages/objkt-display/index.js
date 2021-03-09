@@ -36,7 +36,6 @@ export default class ObjktDisplay extends Component {
         objkt_id: window.location.pathname.split('/')[2],
       })
       .then((res) => {
-        console.log(res.data)
         this.setState({
           objkt: res.data.result[0],
           loading: false,
@@ -45,14 +44,11 @@ export default class ObjktDisplay extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value }, () =>
-      console.log(this.state)
-    )
+    this.setState({ [event.target.name]: event.target.value })
   }
 
   amountChange = (e) => {
     const amount = e.target.value
-    console.log(amount)
     if (!amount || amount.match(/^\d{1,}(\.\d{0,6})?$/)) {
       this.setState({ tz_per_objkt: amount })
     }
@@ -68,7 +64,7 @@ export default class ObjktDisplay extends Component {
 
   collect = () => {
     if (this.context.Tezos == null) {
-      alert('sync')
+      alert('Please sync your wallet by clicking the sync button.')
     } else {
       this.context.collect(
         1,
